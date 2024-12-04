@@ -13,7 +13,7 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 ## Data acquisition modules and display
 * BMP280 - supports SPI and I2C of which SPI is used in this project.
 * DHT11 -  humidity and temperature sensor. It uses 1-Wire protocol
-* MPU6050 - used protocol I2C
+* MPU6050 - used protocol I2C (not yet implemented)
 * LCD1602(16x2) and  I2C interface module
 
 ## Serial communication protocol definition 
