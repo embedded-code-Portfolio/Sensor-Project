@@ -4,6 +4,9 @@
 #include <Wire.h>
 #include <SPI.h>
 
+// custom libs
+#include "BMP280.h"
+
 // Component libraries
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_BMP280.h>
@@ -41,13 +44,33 @@ void setup()
   lcd.init();      // Initilize the lcd
   lcd.backlight(); // Turning on the lcd back light
   lcd.setCursor(0, 0);
-  lcd.print("I2C bus ");
+
+  // scan if connections are Ok.
+  scanAvailableAddress();
+  Serial.print("done scanning");
+
+  lcd.setCursor(0, 0);
+  lcd.print("done scanning");
+  delay(3000);
+  lcd.clear();
+
+  // print from BMP280 to lcd
+  //char tmpBuffer[10];
+  double data = readBMP280();
+  //dtostrf(myValue, 4, 2, tmpBuffer);
+  
+  lcd.setCursor(0, 0);
+  lcd.print("data = ");
+  lcd.print(data, 2);  
 
   delay(3000);
   lcd.clear();
 
-  // scan if connections are Ok.
-  scanAvailableAddress();
+  // lcd.setCursor(0,0);
+  
+
+  // delay(3000);
+  // lcd.clear();
 
   delay(1000);
 }
@@ -55,13 +78,14 @@ void setup()
 //-------------------------------------------------------------
 void loop()
 {
-  // display BMP280 results on lcd
-  readBmp280Sensor();
+  /* display BMP280 results on lcd */
+  // readBmp280Sensor();
   delay(3000);
-  lcd.clear();
+  // lcd.clear();
 
-  // Get humidity data from sender arduino
-  //getHumidityDataOnUart();
+  /* Get humidity data from sender arduino */
+
+  // getHumidityDataOnUart();
 
   delay(1000);
 }
@@ -95,11 +119,8 @@ void readBmp280Sensor()
   Serial.println();
 
   float pressure = bmp.readPressure();
-  // 1 Pa = 0.0001450377 psi
-  float psi = pressure * 1.450377E-4;
   Serial.print("psi: ");
-  Serial.print(psi);
-  // Serial.print(" Pa");
+  Serial.print(pressure);
   Serial.println();
 
   float altitude = bmp.readAltitude();
@@ -120,8 +141,8 @@ void readBmp280Sensor()
   lcd.print(altitude);
 
   lcd.setCursor(0, 1);
-  lcd.print("Psi ");
-  lcd.print(psi);
+  lcd.print("Pa ");
+  lcd.print(pressure);
 
   delay(3000);
 }
@@ -163,9 +184,12 @@ void scanAvailableAddress()
       addressCount++;
     }
   }
+  // Print to serial
   Serial.print("Addresses found: ");
   Serial.print(addressCount);
   Serial.println();
+
+  // Print to lcd
   lcd.setCursor(0, 0);
   lcd.print("Device address ");
   lcd.setCursor(0, 1);

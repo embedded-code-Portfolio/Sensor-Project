@@ -26,6 +26,8 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 ![---](url)
 ...........
 
+
+
 ## Programming environment 
 vscode 
 Extension platformIO
