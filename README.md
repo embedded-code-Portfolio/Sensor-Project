@@ -6,7 +6,7 @@ This project demonstrates or prototypes the communication protocols commonly use
 I2C, SPI, UART and 1-Wire.
 
 ## Operation
-This has been achieved by connecting two Arduino Nanos which are codenamed Collector and Receiver for this purpose.
+This has been achieved by connecting two Arduino Nanos, one of which acts as a transmitter and the other as a receiver.
 The Collector node gets raw data from sensors and sends them to the Receiver using the UART protocol. The receiver node gets data from the Collector node and sends them to the LCD screen display using the I2C module attached to it.
 
 
@@ -17,10 +17,11 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 * LCD1602(16x2) and  I2C interface module
 
 ## Serial communication protocol definition 
-* Inter-Integrated Circuit abbreviated (I2C) -  uses two wires (SCL and SDA ) to exchange data between devices. It is half-duplex, meaning data is sent two-way not simultaneously, multi-master and multi-slave protocol.
-* Serial Peripheral Interface (SPI) - uses four wires (MOSI, MISO, SCL, CS) to send and receive data between devices. SPI is a full-duplex that is data sent two-way simultaneously, it is a single master and multi-slave protocol. Said to be faster at 10MB/s i.e., 2 times  I2C.
+* Inter-integrated circuit abbreviated (I2C) -  uses two wires (SCL and SDA ) to exchange data between devices. It is half-duplex, meaning data is sent two-way not simultaneously, multi-master and multi-slave protocol.
+* Serial Peripheral Interface (SPI) - uses four wires (MOSI, MISO, SCL, CS) to send and receive data between devices. SPI is a full-duplex that is data sent two-way simultaneously, it is a single master and multi-slave protocol.
+  This protocol is faster and runs at 10MB/s i.e., 2 times  I2C.
 * Universal Asynchronous Receiver / Transmitter (UART) - uses two wires (TX and RX) it is often either simplex (one direction), half-duplex or full-duplex.
-* 1-Wire - it uses one wire to send data, and it is a wired half-duplex data bus.
+* 1-Wire - it uses one wire to send data and is a wired half-duplex data bus.
 
 ## Block diagram
 ![Block diagram](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/0e1efab032ab91f865514167a2cdca53bbd10794/Blank%20diagram.jpeg)
@@ -32,7 +33,7 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 
 
 ## Programming environment 
-vscode 
+Vscode 
 Extension platformIO
 
 ## Libraries used
