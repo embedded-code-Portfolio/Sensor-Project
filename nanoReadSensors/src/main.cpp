@@ -11,26 +11,32 @@
 // Function declarations
 void scanAvailableAddress();
 void readBmp280Sensor();
-
+void getHumidityDataOnUart();
 // Global variables
-#define DHTPIN 6 // connected to pin 2
-#define DHTTYPE DHT11
+// #define DHTPIN 2 // connected to pin 2
+// #define DHTTYPE DHT11
 
+// SPI Pins
 #define BMP_SCL 13
 #define BMP_SDO 12
 #define BMP_SDA 11
 #define BMP_CSB 10
 
+// UART communication
+// Buffer to receive DHT11 data usint
+char uartBuffer[100];
+
+// I2C
 // Set lcd address and screen size
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 Adafruit_BMP280 bmp(BMP_CSB, BMP_SDA, BMP_SDO, BMP_SCL);
 
-// setup
+// setup conde
 void setup()
 {
   Wire.begin(); // initilize i2c
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   lcd.init();      // Initilize the lcd
   lcd.backlight(); // Turning on the lcd back light
@@ -45,6 +51,7 @@ void setup()
 
   delay(1000);
 }
+
 //-------------------------------------------------------------
 void loop()
 {
@@ -53,11 +60,19 @@ void loop()
   delay(3000);
   lcd.clear();
 
+  // Get humidity data from sender arduino
+  //getHumidityDataOnUart();
+
   delay(1000);
 }
 //----------------------------------------------------------------------
-// Dispay on lcd
+void getHumidityDataOnUart()
+{
+  Serial.readBytes(uartBuffer, 100);
+  Serial.print(uartBuffer);
+}
 
+// Dispay on lcd
 void readBmp280Sensor()
 {
   lcd.setCursor(0, 0);
@@ -112,7 +127,6 @@ void readBmp280Sensor()
 }
 
 // put function definitions here:
-
 void scanAvailableAddress()
 {
   // variables
