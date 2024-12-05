@@ -28,6 +28,7 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 
 ## Wiring
 ![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/a138ee29309db54c5fcca23a53854dee94d8e331/wiring.jpg)
+<img src="https://github.com/embedded-code-Portfolio/Sensor-Project/blob/a138ee29309db54c5fcca23a53854dee94d8e331/wiring.jpg" alt="Sample Image" width="500" height="500">
 
 
 
