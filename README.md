@@ -24,7 +24,7 @@ The Collector node gets raw data from sensors and sends them to the Receiver usi
 * 1-Wire - it uses one wire to send data and is a wired half-duplex data bus.
 
 ## Block diagram
-![Block diagram](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/0e1efab032ab91f865514167a2cdca53bbd10794/Blank%20diagram.jpeg)
+![Block diagram](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/fa9cbc1b81b3509137abf0c5a0b017d4a78c91ad/Nano_sensor_diagram.jpeg)
 
 ## Wiring
 ![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/a138ee29309db54c5fcca23a53854dee94d8e331/wiring.jpg)
