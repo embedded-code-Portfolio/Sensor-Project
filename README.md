@@ -1,19 +1,16 @@
-# Sensor technology  in embedded Systems
-Data acquisition using nano and sensors using preferred Protocols 
+# Sensor Technology  In Embedded Systems
 
 ## Overview 
-This project demonstrates or prototypes the communication protocols commonly used in embedded systems to  communicate between microcontrollers and peripherals as defined in the protocol section of this README. Example:
-I2C, SPI, UART and 1-Wire.
+This project demonstrates the communication protocols commonly used in embedded systems. Microcontrollers and peripherals in many instances send or receive data using either; I2C, SPI, UART or 1-Wire.This always depends on specific functionality to be achieved.
 
-## Operation
-This has been achieved by connecting two Arduino Nanos, one of which acts as a transmitter and the other as a receiver.
-The Collector node gets raw data from sensors and sends them to the Receiver using the UART protocol. The receiver node gets data from the Collector node and sends them to the LCD screen display using the I2C module attached to it.
+In this project, two Arduino Nanos are used nanoA and nanoB where nanoA gets raw data from DHT11 sensors and transmits it to the nanoB using the UART protocol. The receiver nodeB gets data from the nodeA and sends them to the LCD screen display using the I2C module attached to it
+
 
 
 ## Data acquisition modules and display
 * BMP280 - supports SPI and I2C of which SPI is used in this project.
 * DHT11 -  humidity and temperature sensor. It uses 1-Wire protocol
-* MPU6050 - used protocol I2C (not yet implemented)
+* MPU6050 - used protocol I2C 
 * LCD1602(16x2) and  I2C interface module
 
 ## Serial communication protocol definition 
