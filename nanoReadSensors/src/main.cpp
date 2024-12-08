@@ -4,23 +4,14 @@
 #include <Wire.h>
 #include <SPI.h>
 
-// custom libs
-#include "BMP280.h"
-
 // Component libraries
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_BMP280.h>
+#include <Adafruit_MPU6050.h>
 
-// Function declarations
-void scanAvailableAddress();
-void readBmp280Sensor();
-void getHumidityDataOnUart();
-// Global variables
-// #define DHTPIN 2 // connected to pin 2
-// #define DHTTYPE DHT11
+// defines and constants
 
-// SPI Pins
-#define BMP_SCL 13
+#define BMP_SCL 13 // SPI Pins
 #define BMP_SDO 12
 #define BMP_SDA 11
 #define BMP_CSB 10
@@ -28,6 +19,20 @@ void getHumidityDataOnUart();
 // UART communication
 // Buffer to receive DHT11 data usint
 char uartBuffer[100];
+
+// custom libs ----------------
+
+// user define functions
+void scanAvailableAddress();
+void readMPU6050();
+void readBmp280();
+void readDHT11();
+
+// Global variables
+Adafruit_MPU6050 mpu;
+
+// #define DHTPIN 2 // connected to pin 2
+// #define DHTTYPE DHT11
 
 // I2C
 // Set lcd address and screen size
@@ -41,7 +46,8 @@ void setup()
   Wire.begin(); // initilize i2c
   Serial.begin(9600);
 
-  lcd.init();      // Initilize the lcd
+  // Initilize the lcd
+  lcd.init();
   lcd.backlight(); // Turning on the lcd back light
   lcd.setCursor(0, 0);
 
@@ -53,21 +59,34 @@ void setup()
   lcd.print("done scanning");
   delay(3000);
   lcd.clear();
+  Serial.println("");
+
+  // Initialize mpu
+  if (!mpu.begin())
+  {
+    Serial.println("MPU6050 not found");
+    // while (1) { delay(10); }
+  }
+  Serial.println("MPU6050 found");
+
+  // set acceleration range to +-8G
+  mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
+  // set gyro range to +-500 deg/s
+  mpu.setGyroRange(MPU6050_RANGE_500_DEG);
+  // set filter bandwith to 21 Hz
+  mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
+
+  delay(100);
 
   // print from BMP280 to lcd
-  //char tmpBuffer[10];
-  double data = readBMP280();
-  //dtostrf(myValue, 4, 2, tmpBuffer);
-  
-  lcd.setCursor(0, 0);
-  lcd.print("data = ");
-  lcd.print(data, 2);  
+  // char tmpBuffer[10];
 
-  delay(3000);
-  lcd.clear();
+  // dtostrf(myValue, 4, 2, tmpBuffer);
+
+  // delay(3000);
+  // lcd.clear();
 
   // lcd.setCursor(0,0);
-  
 
   // delay(3000);
   // lcd.clear();
@@ -80,29 +99,63 @@ void loop()
 {
   /* display BMP280 results on lcd */
   // readBmp280Sensor();
-  delay(3000);
+  // delay(3000);
   // lcd.clear();
 
   /* Get humidity data from sender arduino */
 
-  // getHumidityDataOnUart();
+  readDHT11();
+  delay(1000);
 
+  readBmp280();
+  Serial.println("");
+  delay(1000);
+  readMPU6050();
   delay(1000);
 }
-//----------------------------------------------------------------------
-void getHumidityDataOnUart()
+// DHT11  Values -----------------------------------
+void readDHT11()
 {
   Serial.readBytes(uartBuffer, 100);
-  Serial.print(uartBuffer);
+
+  Serial.print("Humidity = ");
+  Serial.println(uartBuffer);
+
+  lcd.setCursor(0, 0);
+  lcd.print("Humidity = ");
+  lcd.print(uartBuffer);
+  delay(1000);
+  lcd.clear();
+}
+// mpu6050 
+void readMPU6050()
+{
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+
+  Serial.print("Acceleration X: ");
+  Serial.print(a.acceleration.x);
+  Serial.print(", Y: ");
+  Serial.print(a.acceleration.y);
+  Serial.print(", Z: ");
+  Serial.print(a.acceleration.z);
+  Serial.println(" m/s^2");
+
+  Serial.print("Rotation X: ");
+  Serial.print(g.gyro.x);
+  Serial.print(", Y: ");
+  Serial.print(g.gyro.y);
+  Serial.print(", Z: ");
+  Serial.print(g.gyro.z);
+  Serial.println(" rad/s");
+
+
+  delay(100);
 }
 
-// Dispay on lcd
-void readBmp280Sensor()
+// Dispay on lcd  and serial .................................
+void readBmp280()
 {
-  lcd.setCursor(0, 0);
-  lcd.print("BMP280 on SPI");
-  delay(3000);
-  lcd.clear();
 
   if (!bmp.begin())
   {
@@ -110,6 +163,11 @@ void readBmp280Sensor()
     lcd.setCursor(0, 0);
     lcd.print("no sensor");
   }
+  lcd.setCursor(0, 0);
+  lcd.print("BMP280 Values");
+  delay(2000);
+  lcd.clear();
+
   // read sensor data
 
   float temperature = bmp.readTemperature();
