@@ -3,7 +3,7 @@
 ## Overview 
 This project demonstrates the communication protocols commonly used in embedded systems. Microcontrollers and peripherals in many instances send or receive data using either; I2C, SPI, UART or 1-Wire.The choice always depends on specific functionality to be achieved.
 
-In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets raw data from DHT11 sensors and transmits it to the nanoB using the UART protocol. The receiver (nanoB) gets data from the sender(nanoA) and sends them to the LCD screen display using the I2C module attached to it
+In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets raw data from DHT11 sensors and transmits it to the nanoB using the UART protocol. The receiver (nanoB) gets data from the sender(nanoA) and sends them to the LCD screen display using the I2C module attached to it.
 
 
 
