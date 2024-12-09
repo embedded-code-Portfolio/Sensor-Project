@@ -1,9 +1,9 @@
 # Sensor Technology  In Embedded Systems
 
 ## Overview 
-This project demonstrates the communication protocols commonly used in embedded systems. Microcontrollers and peripherals in many instances send or receive data using either; I2C, SPI, UART or 1-Wire.The choice always depends on specific functionality to be achieved.
+This project demonstrates the communication protocols commonly used in embedded systems. Microcontrollers and peripherals often send or receive data using either; I2C, SPI, UART or 1-Wire.The choice always depends on the specific functionality to be achieved.
 
-In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets raw data from DHT11 sensors and transmits it to the nanoB using the UART protocol. The receiver (nanoB) gets data from the sender(nanoA) and sends them to the LCD screen display using the I2C module attached to it.
+In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets raw data from DHT11 sensors and transmits it to the nanoB using the UART protocol. The receiver (nanoB) gets data from the sender(nanoA) and sends it to the LCD screen display using the I2C module attached.
 
 
 
@@ -25,7 +25,7 @@ In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets ra
 ![Block diagram](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/fa9cbc1b81b3509137abf0c5a0b017d4a78c91ad/Nano_sensor_diagram.jpeg)
 
 ## Wiring
-![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/a138ee29309db54c5fcca23a53854dee94d8e331/wiring.jpg)
+![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/e4689ce0639e96b6484ebac3b3525a931a164666/nanoA_nanoB.jpeg)
 
 
 ## Programming environment 
