@@ -9,8 +9,9 @@
 #include <Adafruit_BMP280.h>
 #include <Adafruit_MPU6050.h>
 
+// User defined includes
+//#include "DHT11.h"
 // defines and constants
-
 #define BMP_SCL 13 // SPI Pins
 #define BMP_SDO 12
 #define BMP_SDA 11
@@ -90,7 +91,7 @@ void setup()
 
   // delay(3000);
   // lcd.clear();
-
+  
   delay(1000);
 }
 
@@ -104,7 +105,7 @@ void loop()
 
   /* Get humidity data from sender arduino */
 
-  readDHT11();
+  readDHT11(); //------------------------------
   delay(1000);
 
   readBmp280();
@@ -114,12 +115,13 @@ void loop()
   delay(1000);
 }
 // DHT11  Values -----------------------------------
+
 void readDHT11()
 {
   Serial.readBytes(uartBuffer, 100);
-
   Serial.print("Humidity = ");
   Serial.println(uartBuffer);
+  delay(1000);
 
   lcd.setCursor(0, 0);
   lcd.print("Humidity = ");
@@ -127,6 +129,8 @@ void readDHT11()
   delay(1000);
   lcd.clear();
 }
+
+
 // mpu6050 
 void readMPU6050()
 {
@@ -168,15 +172,15 @@ void readBmp280()
   delay(2000);
   lcd.clear();
 
-  // read sensor data
-
+  // read temperature
   float temperature = bmp.readTemperature();
   Serial.print("Temp: ");
   Serial.print(temperature);
   Serial.print(" *C");
   Serial.println();
 
-  float pressure = bmp.readPressure();
+  //read pressure in hpa 
+  float pressure = bmp.readPressure() / 100.00; // offest is -2
   Serial.print("psi: ");
   Serial.print(pressure);
   Serial.println();
