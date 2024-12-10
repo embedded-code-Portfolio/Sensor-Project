@@ -25,7 +25,7 @@ In this project, two Arduino Nanos are used, nanoA and nanoB where nanoA gets ra
 ![Block diagram](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/fa9cbc1b81b3509137abf0c5a0b017d4a78c91ad/Nano_sensor_diagram.jpeg)
 
 ## Wiring
-![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/e4689ce0639e96b6484ebac3b3525a931a164666/nanoA_nanoB.jpeg)
+![Wirig](https://github.com/embedded-code-Portfolio/Sensor-Project/blob/e9399dd2dc4cd4ec659ccaf01b4c21e7f02fb8ea/wiring_new.jpeg)
 
 
 ## Programming environment 
